@@ -14,8 +14,8 @@ export default function BookListView() {
   } = useContext(bookContext);
   const { category } = useParams();
   useEffect(() => {
-    if (category) setUrl(`${apiURL}?topic=${category}`);
-  }, []);
+    setUrl(category ? `${apiURL}?topic=${category}` : apiURL);
+  }, [category]);
 
   return error ? (
     <p>{error}</p>
