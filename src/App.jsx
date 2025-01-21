@@ -1,4 +1,4 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useParams } from "react-router-dom";
 import Header from "./components/Header";
 import Favourites from "./components/Favourites";
 import { createContext, useEffect, useState } from "react";
@@ -10,11 +10,23 @@ export default function App() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [bookList, setBooklist] = useState([]);
-  const [url, setUrl] = useState(apiURL);
+  const { category } = useParams();
+  const [url, setUrl] = useState(
+    category ? `${apiURL}?topic=${category}` : apiURL
+  );
   const [showFavorites, setShowFavorites] = useState(false);
-  const [favoritesList, setFavoritesList] = useState([]);
+  const storedFavorites = localStorage.getItem("favoritesList");
+  const [favoritesList, setFavoritesList] = useState(
+    storedFavorites ? JSON.parse(storedFavorites) : []
+  );
+  useEffect(() => {
+    if (favoritesList)
+      localStorage.setItem("favoritesList", JSON.stringify(favoritesList));
+    else localStorage.removeItem("favoritesList");
+  }, [favoritesList]);
 
   useEffect(() => {
+    console.log(url);
     const fetchData = async () => {
       try {
         setLoading(true);
@@ -42,6 +54,7 @@ export default function App() {
         setError,
         loading,
         setLoading,
+        url,
         setUrl,
         showFavorites,
         setShowFavorites,

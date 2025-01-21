@@ -1,12 +1,11 @@
-import { useContext, useRef } from "react";
+import { useContext } from "react";
 import { bookContext } from "../App";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 export default function Header() {
-  const { setUrl, setShowFavorites, showFavorites, apiURL } =
+  const { setUrl, setShowFavorites, showFavorites, loading, apiURL } =
     useContext(bookContext);
-  let searchValue = useRef("");
-  // let category = useRef("");
+  let searchValue = "";
   const categories = [
     "All",
     "Fiction",
@@ -23,32 +22,48 @@ export default function Header() {
     "War",
     "Philosophy",
   ];
-  //TODO dynamisk kategori linker
+  const { category } = useParams();
   return (
     <>
-      <h1>booklist</h1>
+      <h1>Booklist</h1>
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          setUrl(`${apiURL}?${searchValue.current}`);
+          setUrl(
+            category
+              ? `${apiURL}?topic=${category}&${searchValue}`
+              : `${apiURL}?${searchValue}`
+          );
         }}
       >
         <input
           type="text"
           name="search"
           id="search"
-          onChange={(e) => (searchValue.current = `search=${e.target.value}`)}
+          onChange={(e) =>
+            (searchValue = `search=${e.target.value.replace(" ", "%20")}`)
+          }
         />
         <input type="submit" value="Search" />
       </form>
-      {categories.map((category) => (
-        <Link to={category === "All" ? "/" : `/category/${category}`}>
-          {category}
+      {categories.map((cat, i) => (
+        <Link
+          key={i}
+          to={
+            loading
+              ? `/category/${category}`
+              : cat === "All"
+              ? "/"
+              : `/category/${cat}`
+          }
+        >
+          {cat}
         </Link>
       ))}
       <button type="button" onClick={() => setShowFavorites(!showFavorites)}>
         {"<3"}
       </button>
+      <h2>{category}</h2>
     </>
   );
 }

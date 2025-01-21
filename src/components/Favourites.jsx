@@ -4,7 +4,6 @@ import { bookContext } from "../App";
 export default function Favourites() {
   const { showFavorites, favoritesList, setFavoritesList } =
     useContext(bookContext);
-  //TODO local storage
   return (
     showFavorites && (
       <dialog open>

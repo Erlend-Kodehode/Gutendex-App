@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { bookContext } from "../App";
 import { useParams } from "react-router-dom";
 
@@ -7,14 +7,19 @@ export default function BookListView() {
     bookList,
     loading,
     error,
+    url,
     setUrl,
     setFavoritesList,
     favoritesList,
     apiURL,
   } = useContext(bookContext);
+
+  const [pageCount, setPageCount] = useState(1);
+
   const { category } = useParams();
   useEffect(() => {
-    setUrl(category ? `${apiURL}?topic=${category}` : apiURL);
+    if (url !== `${apiURL}?topic=${category}`)
+      setUrl(category ? `${apiURL}?topic=${category}` : apiURL);
   }, [category]);
 
   return error ? (
@@ -39,14 +44,26 @@ export default function BookListView() {
           </li>
         ))}
       </ul>
-      {/* TODO Page number */}
       {bookList.previous && (
-        <button type="button" onClick={() => setUrl(bookList.previous)}>
+        <button
+          type="button"
+          onClick={() => {
+            setPageCount((prev) => prev - 1);
+            setUrl(bookList.previous);
+          }}
+        >
           Prevoius Page
         </button>
       )}
+      <p>Page: {pageCount}</p>
       {bookList.next && (
-        <button type="button" onClick={() => setUrl(bookList.next)}>
+        <button
+          type="button"
+          onClick={() => {
+            setPageCount((prev) => prev + 1);
+            setUrl(bookList.next);
+          }}
+        >
           Next Page
         </button>
       )}
