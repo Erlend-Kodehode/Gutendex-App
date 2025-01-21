@@ -11,7 +11,8 @@ export default function Favourites() {
         <ul>
           {favoritesList.map((book) => (
             <li key={book.id}>
-              {book.title}
+              <p>{book.title}</p>
+              <img src={book.formats["image/jpeg"]} alt="Book Cover" />
               <button
                 type="button"
                 onClick={() =>

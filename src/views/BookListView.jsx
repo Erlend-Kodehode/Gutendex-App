@@ -1,6 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { bookContext } from "../App";
 import { useParams } from "react-router-dom";
+import { BookLi, BookLink } from "../styling/HeaderStyle";
 
 export default function BookListView() {
   const {
@@ -30,18 +31,24 @@ export default function BookListView() {
     <>
       <ul>
         {bookList.results.map((book) => (
-          <li key={book.id}>
-            {book.title}
+          <BookLi key={book.id}>
+            <BookLink to={`/book/${book.id}`}>
+              <img src={book.formats["image/jpeg"]} alt="Book Cover" />
+              <p>{book.title}</p>
+            </BookLink>
             <button
               type="button"
-              onClick={() => {
-                if (!favoritesList.includes(book))
-                  setFavoritesList((prev) => [...prev, book]);
-              }}
+              onClick={() =>
+                setFavoritesList((prev) =>
+                  prev.includes(book)
+                    ? prev.toSpliced(prev.indexOf(book), 1)
+                    : [...prev, book]
+                )
+              }
             >
               {favoritesList.includes(book) ? "<03" : "<3"}
             </button>
-          </li>
+          </BookLi>
         ))}
       </ul>
       {bookList.previous && (

@@ -34,12 +34,18 @@ export const LinkContainer = styled.nav`
 `;
 
 export const CatLink = styled(Link)`
-  color: black;
+  color: ${(props) => props.color};
   text-decoration: none;
   border: 2px gray solid;
   padding: 0.25em 0.5em;
 `;
 
-export const CurrentCatLink = styled(CatLink)`
-  color: red;
+export const BookLi = styled.li`
+  display: flex;
+  justify-content: center;
+`;
+
+export const BookLink = styled(Link)`
+  display: flex;
+  align-items: center;
 `;

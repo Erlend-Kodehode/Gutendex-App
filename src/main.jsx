@@ -5,6 +5,7 @@ import App from "./App.jsx";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import BookListView from "./views/BookListView.jsx";
 import ErrorView from "./views/ErrorView.jsx";
+import BookDetailView from "./views/BookDetailView.jsx";
 
 const router = createBrowserRouter([
   {
@@ -16,10 +17,13 @@ const router = createBrowserRouter([
         index: true,
         element: <BookListView />,
       },
-
       {
         path: "/category/:category",
         element: <BookListView />,
+      },
+      {
+        path: "/book/:bookID",
+        element: <BookDetailView />,
       },
     ],
   },

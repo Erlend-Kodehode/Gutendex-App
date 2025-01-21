@@ -9,10 +9,15 @@ export default function App() {
   const apiURL = "https://gutendex.com/books";
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  //TODO rename
   const [bookList, setBooklist] = useState([]);
-  const { category } = useParams();
+  const { category, bookID } = useParams();
   const [url, setUrl] = useState(
-    category ? `${apiURL}?topic=${category}` : apiURL
+    category
+      ? `${apiURL}?topic=${category}`
+      : bookID
+      ? `${apiURL}/${bookID}`
+      : apiURL
   );
   const [showFavorites, setShowFavorites] = useState(false);
   const storedFavorites = localStorage.getItem("favoritesList");
