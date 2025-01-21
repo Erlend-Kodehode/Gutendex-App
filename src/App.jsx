@@ -19,8 +19,9 @@ export default function App() {
   const [favoritesList, setFavoritesList] = useState(
     storedFavorites ? JSON.parse(storedFavorites) : []
   );
+
   useEffect(() => {
-    if (favoritesList)
+    if (favoritesList.length > 0)
       localStorage.setItem("favoritesList", JSON.stringify(favoritesList));
     else localStorage.removeItem("favoritesList");
   }, [favoritesList]);

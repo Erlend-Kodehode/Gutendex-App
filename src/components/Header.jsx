@@ -1,6 +1,15 @@
 import { useContext } from "react";
 import { bookContext } from "../App";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import {
+  LinkContainer,
+  CatLink,
+  StyledHeader,
+  CurrentCatLink,
+  TitleSearchContainer,
+  SearchBar,
+  SearchForm,
+} from "../styling/HeaderStyle";
 
 export default function Header() {
   const { setUrl, setShowFavorites, showFavorites, loading, apiURL } =
@@ -23,47 +32,68 @@ export default function Header() {
     "Philosophy",
   ];
   const { category } = useParams();
+
+  // TODO onchange fix type while loading
   return (
-    <>
-      <h1>Booklist</h1>
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          setUrl(
-            category
-              ? `${apiURL}?topic=${category}&${searchValue}`
-              : `${apiURL}?${searchValue}`
-          );
-        }}
-      >
-        <input
-          type="text"
-          name="search"
-          id="search"
-          onChange={(e) =>
-            (searchValue = `search=${e.target.value.replace(" ", "%20")}`)
-          }
-        />
-        <input type="submit" value="Search" />
-      </form>
-      {categories.map((cat, i) => (
-        <Link
-          key={i}
-          to={
-            loading
-              ? `/category/${category}`
-              : cat === "All"
-              ? "/"
-              : `/category/${cat}`
-          }
+    <StyledHeader>
+      <TitleSearchContainer>
+        <h1>Booklist</h1>
+        <SearchForm
+          onSubmit={(e) => {
+            e.preventDefault();
+            setUrl(
+              category
+                ? `${apiURL}?topic=${category}&${searchValue}`
+                : `${apiURL}?${searchValue}`
+            );
+          }}
         >
-          {cat}
-        </Link>
-      ))}
-      <button type="button" onClick={() => setShowFavorites(!showFavorites)}>
-        {"<3"}
-      </button>
-      <h2>{category}</h2>
-    </>
+          <button type="submit">Search</button>
+          <SearchBar
+            type="text"
+            name="search"
+            id="search"
+            onChange={(e) =>
+              (searchValue = `search=${e.target.value.replace(" ", "%20")}`)
+            }
+          />
+        </SearchForm>
+        <button type="button" onClick={() => setShowFavorites(!showFavorites)}>
+          {"<3"}
+        </button>
+      </TitleSearchContainer>
+      <LinkContainer>
+        {categories.map((cat, i) =>
+          cat === category || (cat === "All" && category === undefined) ? (
+            <CurrentCatLink
+              key={i}
+              to={
+                loading
+                  ? `/category/${category}`
+                  : cat === "All"
+                  ? "/"
+                  : `/category/${cat}`
+              }
+            >
+              {cat}
+            </CurrentCatLink>
+          ) : (
+            <CatLink
+              key={i}
+              to={
+                loading
+                  ? `/category/${category}`
+                  : cat === "All"
+                  ? "/"
+                  : `/category/${cat}`
+              }
+            >
+              {cat}
+            </CatLink>
+          )
+        )}
+      </LinkContainer>
+      <h2>{category === undefined ? "All" : category}</h2>
+    </StyledHeader>
   );
 }
