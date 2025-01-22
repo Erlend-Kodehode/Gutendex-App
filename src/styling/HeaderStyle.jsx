@@ -39,13 +39,3 @@ export const CatLink = styled(Link)`
   border: 2px gray solid;
   padding: 0.25em 0.5em;
 `;
-
-export const BookLi = styled.li`
-  display: flex;
-  justify-content: center;
-`;
-
-export const BookLink = styled(Link)`
-  display: flex;
-  align-items: center;
-`;

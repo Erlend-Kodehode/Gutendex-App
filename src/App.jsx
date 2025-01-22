@@ -32,7 +32,6 @@ export default function App() {
   }, [favoritesList]);
 
   useEffect(() => {
-    console.log(url);
     const fetchData = async () => {
       try {
         setLoading(true);
@@ -47,6 +46,7 @@ export default function App() {
         setError(error.message);
       } finally {
         setLoading(false);
+        console.log("done");
       }
     };
     fetchData();

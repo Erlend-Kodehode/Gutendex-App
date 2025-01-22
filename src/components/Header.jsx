@@ -30,7 +30,7 @@ export default function Header() {
     "War",
     "Philosophy",
   ];
-  const { category } = useParams();
+  const { category, bookID } = useParams();
 
   return (
     <StyledHeader>
@@ -64,8 +64,7 @@ export default function Header() {
         {categories.map((cat, i) => (
           <CatLink
             color={
-              //TODO fix when in detail view
-              cat === category || (cat === "All" && category === undefined)
+              cat === category || (cat === "All" && !category && !bookID)
                 ? "red"
                 : "black"
             }
