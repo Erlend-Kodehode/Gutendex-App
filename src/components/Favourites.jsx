@@ -1,12 +1,12 @@
 import { useContext } from "react";
 import { bookContext } from "../App";
 
-export default function Favourites() {
+export default function Favourites({ className }) {
   const { showFavorites, favoritesList, setFavoritesList } =
     useContext(bookContext);
   return (
     showFavorites && (
-      <dialog open>
+      <dialog open className={className}>
         <h3>Favorites</h3>
         <ul>
           {favoritesList.map((book) => (

@@ -1,8 +1,14 @@
 import { useContext, useEffect, useState } from "react";
 import { bookContext } from "../App";
 import { useParams } from "react-router-dom";
-import { BookLi, BookLink } from "../styling/BookListStyle";
-import FavouriteBtn from "../components/FavouriteBtn";
+import {
+  BookCover,
+  BookGrid,
+  BookLi,
+  BookLink,
+  BookTitle,
+  StyledFavBtn,
+} from "../styling/BookListStyle";
 
 export default function BookListView() {
   const { bookList, loading, error, url, setUrl, apiURL } =
@@ -23,17 +29,17 @@ export default function BookListView() {
   ) : (
     bookList.results && (
       <>
-        <ul>
+        <BookGrid>
           {bookList.results.map((book) => (
             <BookLi key={book.id}>
               <BookLink to={`/book/${book.id}`}>
-                <img src={book.formats["image/jpeg"]} alt="Book Cover" />
-                <p>{book.title}</p>
+                <BookTitle>{book.title}</BookTitle>
+                <BookCover src={book.formats["image/jpeg"]} alt="Book Cover" />
               </BookLink>
-              <FavouriteBtn book={book} />
+              <StyledFavBtn book={book} />
             </BookLi>
           ))}
-        </ul>
+        </BookGrid>
         {bookList.previous && (
           <button
             type="button"

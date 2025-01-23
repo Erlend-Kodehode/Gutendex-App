@@ -1,20 +1,29 @@
 import { useContext } from "react";
 import { bookContext } from "../App";
+import filledHeart from "/icons/mdi--heart.svg";
+import emptyHeart from "/icons/mdi-light--heart.svg";
 
-export default function FavouriteBtn({ book }) {
+export default function FavouriteBtn({ book, className }) {
   const { setFavoritesList, favoritesList } = useContext(bookContext);
+
   return (
     <button
+      className={className}
       type="button"
       onClick={() =>
-        setFavoritesList((prev) =>
-          favoritesList.find((e) => e.title === book.title)
-            ? prev.toSpliced(prev.indexOf(book), 1)
-            : [...prev, book]
-        )
+        setFavoritesList((prev) => {
+          const bookInList = prev.find((e) => e.id === book.id);
+          return bookInList
+            ? prev.toSpliced(prev.indexOf(bookInList), 1)
+            : [...prev, book];
+        })
       }
     >
-      {favoritesList.find((e) => e.title === book.title) ? "<03" : "<3"}
+      <img
+        src={
+          favoritesList.find((e) => e.id === book.id) ? filledHeart : emptyHeart
+        }
+      />
     </button>
   );
 }

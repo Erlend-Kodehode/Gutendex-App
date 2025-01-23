@@ -1,5 +1,13 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import Favourites from "../components/Favourites";
+
+export const StyledFavorites = styled(Favourites)`
+  z-index: 1;
+  margin: auto;
+  /* position: fixed; */
+  right: 1em;
+`;
 
 export const StyledHeader = styled.header`
   display: flex;

@@ -1,6 +1,5 @@
 import { Outlet, useParams } from "react-router-dom";
 import Header from "./components/Header";
-import Favourites from "./components/Favourites";
 import { createContext, useEffect, useState } from "react";
 
 export const bookContext = createContext();
@@ -70,7 +69,6 @@ export default function App() {
       }}
     >
       <Header />
-      <Favourites />
       <Outlet />
     </bookContext.Provider>
   );
