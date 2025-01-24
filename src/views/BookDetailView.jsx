@@ -15,8 +15,8 @@ export default function BookDetailView() {
   ) : (
     bookList.title && (
       <>
-        <h3>{bookList.title}</h3>
         <img src={bookList.formats["image/jpeg"]} alt="Book Cover" />
+        <h3>{bookList.title}</h3>
         <ul>
           Forfattere:
           {bookList.authors.map((author, i) => (

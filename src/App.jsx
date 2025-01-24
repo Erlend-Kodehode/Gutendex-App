@@ -45,7 +45,6 @@ export default function App() {
         setError(error.message);
       } finally {
         setLoading(false);
-        console.log("done");
       }
     };
     fetchData();

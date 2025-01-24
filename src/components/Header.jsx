@@ -1,6 +1,7 @@
 import { useContext, useState } from "react";
 import { bookContext } from "../App";
 import { useParams } from "react-router-dom";
+import filledHeart from "/icons/mdi--heart.svg";
 import {
   LinkContainer,
   CatLink,
@@ -9,6 +10,7 @@ import {
   SearchBar,
   SearchForm,
   StyledFavorites,
+  ButtonImg,
 } from "../styling/HeaderStyle";
 
 export default function Header() {
@@ -63,7 +65,7 @@ export default function Header() {
             type="button"
             onClick={() => setShowFavorites(!showFavorites)}
           >
-            {"<3"}
+            <ButtonImg src={filledHeart} />
           </button>
         </TitleSearchContainer>
         <LinkContainer>

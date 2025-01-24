@@ -3,10 +3,8 @@ import styled from "styled-components";
 import Favourites from "../components/Favourites";
 
 export const StyledFavorites = styled(Favourites)`
-  z-index: 1;
-  margin: auto;
-  /* position: fixed; */
-  right: 1em;
+  z-index: 2;
+  margin: 3% 2% 0 auto;
 `;
 
 export const StyledHeader = styled.header`
@@ -14,7 +12,12 @@ export const StyledHeader = styled.header`
   align-items: center;
   flex-direction: column;
   gap: 1em;
-  margin-top: 1em;
+  padding: 1em;
+  background-color: #edf5e0;
+  border-bottom: 2px #e4f0d1 solid;
+  position: sticky;
+  top: 0;
+  z-index: 1;
 `;
 
 export const TitleSearchContainer = styled.div`
@@ -46,4 +49,9 @@ export const CatLink = styled(Link)`
   text-decoration: none;
   border: 2px gray solid;
   padding: 0.25em 0.5em;
+`;
+
+export const ButtonImg = styled.img`
+  filter: invert(24%) sepia(83%) saturate(3031%) hue-rotate(349deg)
+    brightness(107%) contrast(103%);
 `;

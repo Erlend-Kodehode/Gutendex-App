@@ -3,10 +3,14 @@ import { bookContext } from "../App";
 import { useParams } from "react-router-dom";
 import {
   BookCover,
+  BookCoverBackground,
   BookGrid,
   BookLi,
   BookLink,
   BookTitle,
+  PageNavBtn,
+  PageNavContainer,
+  PageNum,
   StyledFavBtn,
 } from "../styling/BookListStyle";
 
@@ -20,6 +24,7 @@ export default function BookListView() {
   useEffect(() => {
     if (url !== `${apiURL}?topic=${category}`)
       setUrl(category ? `${apiURL}?topic=${category}` : apiURL);
+    setPageCount(1);
   }, [category]);
 
   return error ? (
@@ -34,35 +39,45 @@ export default function BookListView() {
             <BookLi key={book.id}>
               <BookLink to={`/book/${book.id}`}>
                 <BookTitle>{book.title}</BookTitle>
-                <BookCover src={book.formats["image/jpeg"]} alt="Book Cover" />
+                <BookCoverBackground>
+                  <BookCover
+                    src={book.formats["image/jpeg"]}
+                    alt="Book Cover"
+                  />
+                </BookCoverBackground>
               </BookLink>
               <StyledFavBtn book={book} />
             </BookLi>
           ))}
         </BookGrid>
-        {bookList.previous && (
-          <button
-            type="button"
-            onClick={() => {
-              setPageCount((prev) => prev - 1);
-              setUrl(bookList.previous);
-            }}
-          >
-            Prevoius Page
-          </button>
-        )}
-        <p>Page: {pageCount}</p>
-        {bookList.next && (
-          <button
-            type="button"
-            onClick={() => {
-              setPageCount((prev) => prev + 1);
-              setUrl(bookList.next);
-            }}
-          >
-            Next Page
-          </button>
-        )}
+        <PageNavContainer>
+          {bookList.previous && (
+            <PageNavBtn
+              type="button"
+              onClick={() => {
+                setPageCount((prev) => prev - 1);
+                setUrl(bookList.previous);
+              }}
+            >
+              Prevoius Page
+            </PageNavBtn>
+          )}
+          <PageNum>
+            Page {pageCount} of {Math.ceil(bookList.count / 32)}
+          </PageNum>
+
+          {bookList.next && (
+            <PageNavBtn
+              type="button"
+              onClick={() => {
+                setPageCount((prev) => prev + 1);
+                setUrl(bookList.next);
+              }}
+            >
+              Next Page
+            </PageNavBtn>
+          )}
+        </PageNavContainer>
       </>
     )
   );

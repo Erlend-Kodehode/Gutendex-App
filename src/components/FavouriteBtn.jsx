@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { bookContext } from "../App";
 import filledHeart from "/icons/mdi--heart.svg";
 import emptyHeart from "/icons/mdi-light--heart.svg";
+import { ButtonImg } from "../styling/HeaderStyle";
 
 export default function FavouriteBtn({ book, className }) {
   const { setFavoritesList, favoritesList } = useContext(bookContext);
@@ -19,7 +20,7 @@ export default function FavouriteBtn({ book, className }) {
         })
       }
     >
-      <img
+      <ButtonImg
         src={
           favoritesList.find((e) => e.id === book.id) ? filledHeart : emptyHeart
         }
