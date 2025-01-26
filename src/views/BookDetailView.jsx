@@ -1,7 +1,12 @@
 import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { bookContext } from "../App";
-import FavouriteBtn from "../components/FavouriteBtn";
+import {
+  BookDetailContainer,
+  DetailFavBtn,
+  InfoContainer,
+  InfoLists,
+} from "../styling/BookDetailStyle";
 
 export default function BookDetailView() {
   const { bookID } = useParams();
@@ -14,31 +19,33 @@ export default function BookDetailView() {
     <p>loading...</p>
   ) : (
     bookList.title && (
-      <>
+      <BookDetailContainer>
         <img src={bookList.formats["image/jpeg"]} alt="Book Cover" />
-        <h3>{bookList.title}</h3>
-        <ul>
-          Forfattere:
-          {bookList.authors.map((author, i) => (
-            <li key={i}>{author.name}</li>
-          ))}
-        </ul>
-        <p>Nedlastinger: {bookList.download_count}</p>
-        <ul>
-          Kategorier:
-          {bookList.subjects.map((cat, i) => (
-            <li key={i}>{cat}</li>
-          ))}
-        </ul>
-        <ul>
-          Språk:
-          {bookList.languages.map((language, i) => (
-            <li key={i}>{language}</li>
-          ))}
-        </ul>
-        <a href={bookList.formats["text/html"]}>Link til Ebok</a>
-        <FavouriteBtn book={bookList} />
-      </>
+        <InfoContainer>
+          <h3>{bookList.title}</h3>
+          <InfoLists>
+            Forfattere:
+            {bookList.authors.map((author, i) => (
+              <li key={i}>{author.name}</li>
+            ))}
+          </InfoLists>
+          <p>{bookList.download_count} Nedlastinger</p>
+          <InfoLists>
+            Kategorier:
+            {bookList.subjects.map((cat, i) => (
+              <li key={i}>{cat}</li>
+            ))}
+          </InfoLists>
+          <InfoLists>
+            Språk:
+            {bookList.languages.map((language, i) => (
+              <li key={i}>{language}</li>
+            ))}
+          </InfoLists>
+          <a href={bookList.formats["text/html"]}>Link til Ebok</a>
+          <DetailFavBtn book={bookList} />
+        </InfoContainer>
+      </BookDetailContainer>
     )
   );
 }

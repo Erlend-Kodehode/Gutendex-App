@@ -9,10 +9,10 @@ import {
   TitleSearchContainer,
   SearchBar,
   SearchForm,
-  StyledFavorites,
   ButtonImg,
 } from "../styling/HeaderStyle";
 
+import Favourites from "../components/Favourites";
 export default function Header() {
   const { setUrl, setShowFavorites, showFavorites, loading, apiURL } =
     useContext(bookContext);
@@ -37,7 +37,7 @@ export default function Header() {
 
   return (
     <>
-      <StyledFavorites />
+      <Favourites />
       <StyledHeader>
         <TitleSearchContainer>
           <h1>Booklist</h1>

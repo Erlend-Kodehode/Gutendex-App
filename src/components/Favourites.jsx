@@ -1,14 +1,15 @@
 import { useContext } from "react";
 import { bookContext } from "../App";
+import { StyledDialog, FavouritesList } from "../styling/FavouritesStyle";
 
-export default function Favourites({ className }) {
+export default function Favourites() {
   const { showFavorites, favoritesList, setFavoritesList } =
     useContext(bookContext);
   return (
     showFavorites && (
-      <dialog open className={className}>
+      <StyledDialog open>
         <h3>Favorites</h3>
-        <ul>
+        <FavouritesList>
           {favoritesList.map((book) => (
             <li key={book.id}>
               <p>{book.title}</p>
@@ -25,8 +26,8 @@ export default function Favourites({ className }) {
               </button>
             </li>
           ))}
-        </ul>
-      </dialog>
+        </FavouritesList>
+      </StyledDialog>
     )
   );
 }

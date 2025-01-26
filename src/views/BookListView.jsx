@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { bookContext } from "../App";
 import { useParams } from "react-router-dom";
 import {
+  BookContainer,
   BookCover,
   BookCoverBackground,
   BookGrid,
@@ -37,16 +38,18 @@ export default function BookListView() {
         <BookGrid>
           {bookList.results.map((book) => (
             <BookLi key={book.id}>
-              <BookLink to={`/book/${book.id}`}>
-                <BookTitle>{book.title}</BookTitle>
-                <BookCoverBackground>
-                  <BookCover
-                    src={book.formats["image/jpeg"]}
-                    alt="Book Cover"
-                  />
-                </BookCoverBackground>
-              </BookLink>
-              <StyledFavBtn book={book} />
+              <BookContainer>
+                <BookLink title={book.title} to={`/book/${book.id}`}>
+                  <BookTitle>{book.title}</BookTitle>
+                  <BookCoverBackground>
+                    <BookCover
+                      src={book.formats["image/jpeg"]}
+                      alt="Book Cover"
+                    />
+                  </BookCoverBackground>
+                </BookLink>
+                <StyledFavBtn book={book} />
+              </BookContainer>
             </BookLi>
           ))}
         </BookGrid>
