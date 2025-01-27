@@ -29,7 +29,6 @@ export const BookLink = styled(Link)`
   text-decoration: none;
 `;
 
-//TODO cut off word at certain length and display on hover
 export const BookTitle = styled.p`
   text-align: center;
   max-width: 13em;
@@ -57,13 +56,17 @@ export const BookCover = styled.img`
 `;
 
 export const StyledFavBtn = styled(FavouriteBtn)`
-  padding: 1em;
   position: absolute;
   right: 5%;
   bottom: 1em;
+  padding: 0.9em;
   border: none;
   border-radius: 2em;
   cursor: pointer;
+  background-color: #cfe9c3;
+  &:hover {
+    background-color: #bed8b2;
+  }
 `;
 
 export const PageNavContainer = styled.div`

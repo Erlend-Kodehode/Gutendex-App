@@ -16,7 +16,7 @@ import {
 } from "../styling/BookListStyle";
 
 export default function BookListView() {
-  const { bookList, loading, error, url, setUrl, apiURL } =
+  const { fetchData, loading, error, url, setUrl, apiURL } =
     useContext(bookContext);
 
   const [pageCount, setPageCount] = useState(1);
@@ -33,10 +33,10 @@ export default function BookListView() {
   ) : loading ? (
     <p>loading..</p>
   ) : (
-    bookList.results && (
+    fetchData.results && (
       <>
         <BookGrid>
-          {bookList.results.map((book) => (
+          {fetchData.results.map((book) => (
             <BookLi key={book.id}>
               <BookContainer>
                 <BookLink title={book.title} to={`/book/${book.id}`}>
@@ -54,27 +54,27 @@ export default function BookListView() {
           ))}
         </BookGrid>
         <PageNavContainer>
-          {bookList.previous && (
+          {fetchData.previous && (
             <PageNavBtn
               type="button"
               onClick={() => {
                 setPageCount((prev) => prev - 1);
-                setUrl(bookList.previous);
+                setUrl(fetchData.previous);
               }}
             >
               Prevoius Page
             </PageNavBtn>
           )}
           <PageNum>
-            Page {pageCount} of {Math.ceil(bookList.count / 32)}
+            Page {pageCount} of {Math.ceil(fetchData.count / 32)}
           </PageNum>
 
-          {bookList.next && (
+          {fetchData.next && (
             <PageNavBtn
               type="button"
               onClick={() => {
                 setPageCount((prev) => prev + 1);
-                setUrl(bookList.next);
+                setUrl(fetchData.next);
               }}
             >
               Next Page

@@ -20,9 +20,13 @@ export const InfoLists = styled.ul`
 `;
 
 export const DetailFavBtn = styled(FavouriteBtn)`
-  padding: 1em;
+  padding: 0.9em;
   border: none;
   border-radius: 2em;
   cursor: pointer;
-  width: 4em;
+  width: 3.9em;
+  background-color: #cfe9c3;
+  &:hover {
+    background-color: #bed8b2;
+  }
 `;

@@ -10,6 +10,8 @@ import {
   SearchBar,
   SearchForm,
   ButtonImg,
+  FavListBtn,
+  SearchBtn,
 } from "../styling/HeaderStyle";
 
 import Favourites from "../components/Favourites";
@@ -36,61 +38,57 @@ export default function Header() {
   const { category, bookID } = useParams();
 
   return (
-    <>
+    <StyledHeader>
       <Favourites />
-      <StyledHeader>
-        <TitleSearchContainer>
-          <h1>Booklist</h1>
-          <SearchForm
-            onSubmit={(e) => {
-              e.preventDefault();
-              setUrl(
-                category
-                  ? `${apiURL}?topic=${category}&${searchValue}`
-                  : `${apiURL}?${searchValue}`
-              );
-            }}
+      <TitleSearchContainer>
+        <h1>Booklist</h1>
+        <SearchForm
+          onSubmit={(e) => {
+            e.preventDefault();
+            setUrl(
+              category
+                ? `${apiURL}?topic=${category}&${searchValue}`
+                : `${apiURL}?${searchValue}`
+            );
+          }}
+        >
+          <SearchBtn type="submit">Search</SearchBtn>
+          <SearchBar
+            type="text"
+            name="search"
+            id="search"
+            onChange={(e) =>
+              setSearchValue(`search=${e.target.value.replace(" ", "%20")}`)
+            }
+          />
+        </SearchForm>
+        <FavListBtn
+          type="button"
+          onClick={() => setShowFavorites(!showFavorites)}
+        >
+          <ButtonImg src={filledHeart} />
+        </FavListBtn>
+      </TitleSearchContainer>
+      <LinkContainer>
+        {categories.map((cat, i) => (
+          <CatLink
+            $selected={
+              cat === category || (cat === "All" && !category && !bookID)
+            }
+            key={i}
+            to={
+              loading
+                ? `/category/${category}`
+                : cat === "All"
+                ? "/"
+                : `/category/${cat}`
+            }
           >
-            <button type="submit">Search</button>
-            <SearchBar
-              type="text"
-              name="search"
-              id="search"
-              onChange={(e) =>
-                setSearchValue(`search=${e.target.value.replace(" ", "%20")}`)
-              }
-            />
-          </SearchForm>
-          <button
-            type="button"
-            onClick={() => setShowFavorites(!showFavorites)}
-          >
-            <ButtonImg src={filledHeart} />
-          </button>
-        </TitleSearchContainer>
-        <LinkContainer>
-          {categories.map((cat, i) => (
-            <CatLink
-              color={
-                cat === category || (cat === "All" && !category && !bookID)
-                  ? "red"
-                  : "black"
-              }
-              key={i}
-              to={
-                loading
-                  ? `/category/${category}`
-                  : cat === "All"
-                  ? "/"
-                  : `/category/${cat}`
-              }
-            >
-              {cat}
-            </CatLink>
-          ))}
-        </LinkContainer>
-        {/* <h2>{category === undefined ? "All" : category}</h2> */}
-      </StyledHeader>
-    </>
+            {cat}
+          </CatLink>
+        ))}
+      </LinkContainer>
+      {/* <h2>{category === undefined ? "All" : category}</h2> */}
+    </StyledHeader>
   );
 }

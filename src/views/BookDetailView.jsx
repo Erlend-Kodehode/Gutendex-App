@@ -10,7 +10,7 @@ import {
 
 export default function BookDetailView() {
   const { bookID } = useParams();
-  const { setUrl, bookList, apiURL, loading } = useContext(bookContext);
+  const { setUrl, fetchData, apiURL, loading } = useContext(bookContext);
   useEffect(() => {
     setUrl(`${apiURL}/${bookID}`);
   }, [bookID]);
@@ -18,32 +18,32 @@ export default function BookDetailView() {
   return loading ? (
     <p>loading...</p>
   ) : (
-    bookList.title && (
+    fetchData.title && (
       <BookDetailContainer>
-        <img src={bookList.formats["image/jpeg"]} alt="Book Cover" />
+        <img src={fetchData.formats["image/jpeg"]} alt="Book Cover" />
         <InfoContainer>
-          <h3>{bookList.title}</h3>
+          <h3>{fetchData.title}</h3>
           <InfoLists>
             Forfattere:
-            {bookList.authors.map((author, i) => (
+            {fetchData.authors.map((author, i) => (
               <li key={i}>{author.name}</li>
             ))}
           </InfoLists>
-          <p>{bookList.download_count} Nedlastinger</p>
+          <p>{fetchData.download_count} Nedlastinger</p>
           <InfoLists>
             Kategorier:
-            {bookList.subjects.map((cat, i) => (
+            {fetchData.subjects.map((cat, i) => (
               <li key={i}>{cat}</li>
             ))}
           </InfoLists>
           <InfoLists>
             Språk:
-            {bookList.languages.map((language, i) => (
+            {fetchData.languages.map((language, i) => (
               <li key={i}>{language}</li>
             ))}
           </InfoLists>
-          <a href={bookList.formats["text/html"]}>Link til Ebok</a>
-          <DetailFavBtn book={bookList} />
+          <a href={fetchData.formats["text/html"]}>Link til Ebok</a>
+          <DetailFavBtn book={fetchData} />
         </InfoContainer>
       </BookDetailContainer>
     )

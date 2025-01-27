@@ -8,8 +8,7 @@ export default function App() {
   const apiURL = "https://gutendex.com/books";
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  //TODO rename
-  const [bookList, setBooklist] = useState([]);
+  const [fetchData, setFetchData] = useState([]);
   const { category, bookID } = useParams();
   const [url, setUrl] = useState(
     category
@@ -40,7 +39,7 @@ export default function App() {
           throw new Error(`Error fetching data: ${response.status}`);
 
         const bookData = await response.json();
-        setBooklist(bookData);
+        setFetchData(bookData);
       } catch (error) {
         setError(error.message);
       } finally {
@@ -53,7 +52,7 @@ export default function App() {
   return (
     <bookContext.Provider
       value={{
-        bookList,
+        fetchData,
         error,
         setError,
         loading,

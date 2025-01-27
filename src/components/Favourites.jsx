@@ -1,29 +1,50 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { bookContext } from "../App";
-import { StyledDialog, FavouritesList } from "../styling/FavouritesStyle";
+import {
+  StyledDialog,
+  FavouritesList,
+  FavBookTitle,
+  FavLink,
+  UnFavBtn,
+  FavItem,
+  UnFavImg,
+} from "../styling/FavouritesStyle";
+import emptyHeart from "/icons/mdi-light--heart.svg";
+import filledHeart from "/icons/mdi--heart.svg";
 
 export default function Favourites() {
+  const [hoveredBtn, setHoveredBtn] = useState(null);
   const { showFavorites, favoritesList, setFavoritesList } =
     useContext(bookContext);
+  const maxListLength = 5;
   return (
     showFavorites && (
       <StyledDialog open>
         <h3>Favorites</h3>
-        <FavouritesList>
+        <FavouritesList $favNum={Math.min(favoritesList.length, maxListLength)}>
           {favoritesList.map((book) => (
             <li key={book.id}>
-              <p>{book.title}</p>
-              <img src={book.formats["image/jpeg"]} alt="Book Cover" />
-              <button
-                type="button"
-                onClick={() =>
-                  setFavoritesList((prev) =>
-                    prev.toSpliced(prev.indexOf(book), 1)
-                  )
-                }
-              >
-                {"</3"}
-              </button>
+              <FavItem>
+                <FavLink to={`/book/${book.id}`} title={book.title}>
+                  <FavBookTitle>{book.title}</FavBookTitle>
+                  <img src={book.formats["image/jpeg"]} alt="Book Cover" />
+                </FavLink>
+                <UnFavBtn
+                  type="button"
+                  onMouseEnter={() => setHoveredBtn(book.id)}
+                  onMouseLeave={() => setHoveredBtn(null)}
+                  onClick={() => {
+                    setFavoritesList((prev) =>
+                      prev.toSpliced(prev.indexOf(book), 1)
+                    );
+                    setHoveredBtn(null);
+                  }}
+                >
+                  <UnFavImg
+                    src={hoveredBtn === book.id ? emptyHeart : filledHeart}
+                  />
+                </UnFavBtn>
+              </FavItem>
             </li>
           ))}
         </FavouritesList>
