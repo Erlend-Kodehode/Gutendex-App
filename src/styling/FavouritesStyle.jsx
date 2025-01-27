@@ -3,24 +3,39 @@ import styled from "styled-components";
 
 export const StyledDialog = styled.dialog`
   z-index: 2;
-  margin: 3% 2% 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 4% 2% 0 auto;
   border: 2px #e4f0d1 solid;
   background-color: #f6faf0;
   border-radius: 1em;
   padding: 1em;
   overflow-y: auto;
   max-height: 88vh;
+  max-width: 95vw;
+  @media only screen and (max-width: 1000px) {
+    margin-top: 6%;
+  }
+
+  @media only screen and (max-width: 650px) {
+    margin-top: 9%;
+  }
+
+  @media only screen and (max-width: 500px) {
+    margin-top: 18%;
+  }
+  @media only screen and (max-width: 400px) {
+    margin-top: 24%;
+  }
 `;
 
 export const FavouritesList = styled.ul`
   list-style-type: none;
-  display: grid;
-  grid-template-columns: repeat(
-    ${(props) => props.$favNum},
-    ${(props) => 100 / props.$favNum - 2 + "%"}
-  );
-  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
   gap: 1em;
+  justify-content: center;
 `;
 
 export const FavItem = styled.div`
@@ -54,7 +69,6 @@ export const UnFavBtn = styled.button`
   border: none;
   border-radius: 2em;
   cursor: pointer;
-  /* TODO adjust color maybe */
   background-color: #cfe9c3;
   &:hover {
     background-color: #bed8b2;

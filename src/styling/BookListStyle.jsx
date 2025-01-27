@@ -8,6 +8,19 @@ export const BookGrid = styled.ul`
   grid-template-columns: repeat(5, 20%);
   justify-content: center;
   gap: 1rem;
+  @media only screen and (max-width: 1000px) {
+    grid-template-columns: repeat(4, 25%);
+  }
+  @media only screen and (max-width: 850px) {
+    grid-template-columns: repeat(3, 35%);
+  }
+  @media only screen and (max-width: 650px) {
+    grid-template-columns: repeat(2, 50%);
+  }
+  @media only screen and (max-width: 470px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 export const BookLi = styled.li`
@@ -80,4 +93,14 @@ export const PageNum = styled.p`
   font-size: 1.25em;
 `;
 
-export const PageNavBtn = styled.button``;
+export const PageNavBtn = styled.button`
+  background-color: #daebc1;
+  border: 2px #cbddae solid;
+  border-radius: 0.5em;
+  padding: 0.25em 0.5em;
+  &:hover {
+    background-color: #aec97e;
+    border: 2px #8aa85a solid;
+  }
+  cursor: pointer;
+`;

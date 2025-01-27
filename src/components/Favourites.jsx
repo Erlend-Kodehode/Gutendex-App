@@ -16,12 +16,12 @@ export default function Favourites() {
   const [hoveredBtn, setHoveredBtn] = useState(null);
   const { showFavorites, favoritesList, setFavoritesList } =
     useContext(bookContext);
-  const maxListLength = 5;
+
   return (
     showFavorites && (
       <StyledDialog open>
         <h3>Favorites</h3>
-        <FavouritesList $favNum={Math.min(favoritesList.length, maxListLength)}>
+        <FavouritesList>
           {favoritesList.map((book) => (
             <li key={book.id}>
               <FavItem>
