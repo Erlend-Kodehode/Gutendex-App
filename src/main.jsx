@@ -9,7 +9,7 @@ import BookDetailView from "./views/BookDetailView.jsx";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/Gutendex-App/",
     element: <App />,
     errorElement: <ErrorView />,
     children: [
