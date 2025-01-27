@@ -25,7 +25,10 @@ export default function Favourites() {
           {favoritesList.map((book) => (
             <li key={book.id}>
               <FavItem>
-                <FavLink to={`/book/${book.id}`} title={book.title}>
+                <FavLink
+                  to={`/Gutendex-App/book/${book.id}`}
+                  title={book.title}
+                >
                   <FavBookTitle>{book.title}</FavBookTitle>
                   <img src={book.formats["image/jpeg"]} alt="Book Cover" />
                 </FavLink>

@@ -39,7 +39,10 @@ export default function BookListView() {
           {fetchData.results.map((book) => (
             <BookLi key={book.id}>
               <BookContainer>
-                <BookLink title={book.title} to={`/book/${book.id}`}>
+                <BookLink
+                  title={book.title}
+                  to={`/Gutendex-App/book/${book.id}`}
+                >
                   <BookTitle>{book.title}</BookTitle>
                   <BookCoverBackground>
                     <BookCover

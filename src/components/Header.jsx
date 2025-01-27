@@ -82,10 +82,10 @@ export default function Header() {
             key={i}
             to={
               loading
-                ? `/category/${category}`
+                ? `/Gutendex-App/category/${category}`
                 : cat === "All"
-                ? "/"
-                : `/category/${cat}`
+                ? "/Gutendex-App/"
+                : `/Gutendex-App/category/${cat}`
             }
           >
             {cat}
