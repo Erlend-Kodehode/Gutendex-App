@@ -18,11 +18,11 @@ const router = createBrowserRouter([
         element: <BookListView />,
       },
       {
-        path: "/category/:category",
+        path: "/Gutendex-Appcategory/:category",
         element: <BookListView />,
       },
       {
-        path: "/book/:bookID",
+        path: "/Gutendex-App/book/:bookID",
         element: <BookDetailView />,
       },
     ],
