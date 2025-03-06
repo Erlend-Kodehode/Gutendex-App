@@ -24,20 +24,20 @@ export default function BookDetailView() {
         <InfoContainer>
           <h3>{fetchData.title}</h3>
           <InfoLists>
-            Forfattere:
+            Authors:
             {fetchData.authors.map((author, i) => (
               <li key={i}>{author.name}</li>
             ))}
           </InfoLists>
-          <p>{fetchData.download_count} Nedlastinger</p>
+          <p>{fetchData.download_count} Downloads</p>
           <InfoLists>
-            Kategorier:
+            Categories:
             {fetchData.subjects.map((cat, i) => (
               <li key={i}>{cat}</li>
             ))}
           </InfoLists>
           <InfoLists>
-            Språk:
+            Languages:
             {fetchData.languages.map((language, i) => (
               <li key={i}>{language}</li>
             ))}
