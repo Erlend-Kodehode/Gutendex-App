@@ -1,6 +1,12 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
+export const BackgroundClick = styled.div`
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+`;
+
 export const StyledDialog = styled.dialog`
   z-index: 2;
   display: flex;

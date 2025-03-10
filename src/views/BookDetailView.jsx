@@ -2,7 +2,10 @@ import { useContext, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { bookContext } from "../App";
 import {
+  BDetailLinks,
   BookDetailContainer,
+  BookTitle,
+  DescContainer,
   DetailFavBtn,
   InfoContainer,
   InfoLists,
@@ -22,28 +25,32 @@ export default function BookDetailView() {
       <BookDetailContainer>
         <img src={fetchData.formats["image/jpeg"]} alt="Book Cover" />
         <InfoContainer>
-          <h3>{fetchData.title}</h3>
-          <InfoLists>
-            Authors:
-            {fetchData.authors.map((author, i) => (
-              <li key={i}>{author.name}</li>
-            ))}
-          </InfoLists>
-          <p>{fetchData.download_count} Downloads</p>
-          <InfoLists>
-            Categories:
-            {fetchData.subjects.map((cat, i) => (
-              <li key={i}>{cat}</li>
-            ))}
-          </InfoLists>
-          <InfoLists>
-            Languages:
-            {fetchData.languages.map((language, i) => (
-              <li key={i}>{language}</li>
-            ))}
-          </InfoLists>
-          <a href={fetchData.formats["text/html"]}>Link til Ebok</a>
-          <DetailFavBtn book={fetchData} />
+          <BookTitle>{fetchData.title}</BookTitle>
+          <DescContainer>
+            <InfoLists>
+              Authors:
+              {fetchData.authors.map((author, i) => (
+                <li key={i}>{author.name}</li>
+              ))}
+            </InfoLists>
+            <InfoLists>
+              Categories:
+              {fetchData.subjects.map((cat, i) => (
+                <li key={i}>{cat}</li>
+              ))}
+            </InfoLists>
+            <InfoLists>
+              Languages:
+              {fetchData.languages.map((language, i) => (
+                <li key={i}>{language}</li>
+              ))}
+            </InfoLists>
+            <p>{fetchData.download_count} Downloads</p>
+            <BDetailLinks>
+              <DetailFavBtn book={fetchData} />
+              <a href={fetchData.formats["text/html"]}>Ebook</a>
+            </BDetailLinks>
+          </DescContainer>
         </InfoContainer>
       </BookDetailContainer>
     )
