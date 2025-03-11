@@ -14,6 +14,7 @@ import {
   FavListBtn,
   SearchBtn,
   TitleContainer,
+  Title,
 } from "../styling/HeaderStyle";
 
 import Favourites from "../components/Favourites";
@@ -43,7 +44,7 @@ export default function Header() {
     <StyledHeader>
       <Favourites />
       <TitleContainer>
-        <h1>Booklist</h1>
+        <Title to={"/Gutendex-App/"}>Booklist</Title>
         <SearchContainer>
           <SearchForm
             onSubmit={(e) => {

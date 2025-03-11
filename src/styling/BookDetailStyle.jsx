@@ -6,16 +6,20 @@ export const BookDetailContainer = styled.div`
   gap: 1em;
   height: 80vh;
   align-items: center;
-  padding: 1em 5em;
+  padding: 0 5em;
+  margin: 1em;
 `;
 
 export const DescContainer = styled.div`
   background-color: #edf5e0;
   display: flex;
   flex-direction: column;
-  gap: 0.5em;
+  gap: 1em;
+  justify-content: space-between;
   border-radius: 2rem;
   padding: 1em;
+  min-width: 30em;
+  min-height: 25em;
 `;
 
 export const InfoContainer = styled.div`

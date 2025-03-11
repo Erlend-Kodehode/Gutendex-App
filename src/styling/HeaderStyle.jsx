@@ -24,6 +24,13 @@ export const TitleContainer = styled.div`
   }
 `;
 
+export const Title = styled(Link)`
+  font-size: 2em;
+  color: black;
+  text-decoration: none;
+  font-weight: bold;
+`;
+
 export const SearchContainer = styled.div`
   display: flex;
   justify-content: center;
@@ -97,7 +104,7 @@ export const CatLink = styled(Link)`
   border-radius: 0.5em;
   padding: 0.25em 0.5em;
   &:hover {
-    background-color: ${(props) => !props.$selected && "#AEC97E"};
-    border: ${(props) => !props.$selected && " 2px #8aa85a solid"};
+    background-color: #aec97e;
+    border: 2px #8aa85a solid;
   }
 `;
